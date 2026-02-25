@@ -1,0 +1,230 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=Manrope:wght@300..800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================================================
+   Dark portfolio — minimal neon accents
+   Typography: Fraunces (display) + Manrope (body)
+   ========================================================= */
+
+:root {
+  --font-sans: "Manrope", ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+  --font-serif: "Fraunces", ui-serif, Georgia, serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+
+  /* Core palette (space-separated HSL) */
+  --background: 228 26% 7%;
+  --foreground: 210 40% 96%;
+
+  --card: 228 24% 9%;
+  --card-foreground: 210 40% 96%;
+  --card-border: 230 18% 18%;
+
+  --popover: 228 24% 10%;
+  --popover-foreground: 210 40% 96%;
+  --popover-border: 230 18% 20%;
+
+  --border: 230 18% 18%;
+  --input: 230 18% 22%;
+  --ring: 190 95% 55%;
+
+  /* Neon accents */
+  --primary: 190 95% 55%; /* cyan */
+  --primary-foreground: 228 26% 7%;
+
+  --secondary: 230 18% 16%;
+  --secondary-foreground: 210 40% 96%;
+
+  --muted: 230 18% 14%;
+  --muted-foreground: 215 20% 70%;
+
+  --accent: 285 92% 62%; /* magenta */
+  --accent-foreground: 228 26% 7%;
+
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 210 40% 98%;
+
+  --sidebar: 228 24% 8%;
+  --sidebar-foreground: 210 40% 96%;
+  --sidebar-border: 230 18% 18%;
+  --sidebar-primary: 190 95% 55%;
+  --sidebar-primary-foreground: 228 26% 7%;
+  --sidebar-accent: 230 18% 16%;
+  --sidebar-accent-foreground: 210 40% 96%;
+  --sidebar-ring: 190 95% 55%;
+
+  --chart-1: 190 95% 55%;
+  --chart-2: 285 92% 62%;
+  --chart-3: 34 90% 55%;
+  --chart-4: 152 72% 45%;
+  --chart-5: 215 90% 60%;
+
+  --radius: 0.9rem;
+
+  /* Elevation helpers (keep existing utility system compatible) */
+  --button-outline: rgba(255, 255, 255, 0.12);
+  --badge-outline: rgba(255, 255, 255, 0.08);
+  --opaque-button-border-intensity: 10;
+  --elevate-1: rgba(255, 255, 255, 0.04);
+  --elevate-2: rgba(255, 255, 255, 0.08);
+
+  --shadow-2xs: 0 1px 0 0 hsl(190 95% 55% / 0.05);
+  --shadow-xs: 0 1px 0 0 hsl(190 95% 55% / 0.06);
+  --shadow-sm: 0 1px 0 0 hsl(190 95% 55% / 0.06), 0 10px 30px -18px hsl(0 0% 0% / 0.45);
+  --shadow: 0 1px 0 0 hsl(190 95% 55% / 0.06), 0 20px 50px -30px hsl(0 0% 0% / 0.55);
+  --shadow-md: 0 1px 0 0 hsl(190 95% 55% / 0.08), 0 28px 70px -38px hsl(0 0% 0% / 0.6);
+  --shadow-lg: 0 1px 0 0 hsl(190 95% 55% / 0.1), 0 40px 90px -48px hsl(0 0% 0% / 0.65);
+  --shadow-xl: 0 1px 0 0 hsl(285 92% 62% / 0.09), 0 60px 120px -70px hsl(0 0% 0% / 0.7);
+  --shadow-2xl: 0 1px 0 0 hsl(285 92% 62% / 0.12), 0 90px 160px -95px hsl(0 0% 0% / 0.75);
+}
+
+.dark {
+  /* keep values identical; we are a dark-first theme */
+  --background: 228 26% 7%;
+  --foreground: 210 40% 96%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans);
+    text-rendering: geometricPrecision;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-serif);
+    @apply font-semibold tracking-tight;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.28);
+  }
+}
+
+/* Subtle grain overlay for depth */
+@layer utilities {
+  .grain {
+    position: relative;
+  }
+  .grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.09;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
+    border-radius: inherit;
+  }
+
+  .text-gradient {
+    background-image: linear-gradient(
+      92deg,
+      hsl(var(--foreground)) 0%,
+      hsl(var(--primary)) 35%,
+      hsl(var(--accent)) 75%,
+      hsl(var(--foreground)) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .bg-mesh {
+    background:
+      radial-gradient(1200px 600px at 15% -10%, hsl(var(--primary) / 0.28), transparent 55%),
+      radial-gradient(900px 500px at 85% 0%, hsl(var(--accent) / 0.18), transparent 60%),
+      radial-gradient(800px 600px at 70% 110%, hsl(var(--primary) / 0.12), transparent 62%),
+      linear-gradient(180deg, hsl(var(--background)) 0%, hsl(228 26% 6%) 100%);
+  }
+
+  .ring-neon {
+    box-shadow:
+      0 0 0 1px hsl(var(--primary) / 0.18),
+      0 0 0 6px hsl(var(--primary) / 0.08),
+      0 30px 80px -60px hsl(var(--primary) / 0.55);
+  }
+
+  .card-glass {
+    background:
+      linear-gradient(180deg, hsl(var(--card) / 0.72), hsl(var(--card) / 0.52));
+    backdrop-filter: blur(14px);
+    border: 1px solid hsl(var(--border) / 0.7);
+    box-shadow: var(--shadow-md);
+  }
+
+  .hover-lift {
+    transition: transform 240ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      box-shadow 240ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      border-color 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+    border-color: hsl(var(--primary) / 0.4);
+  }
+
+  @keyframes floaty {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+    50% {
+      transform: translate3d(0, -8px, 0);
+    }
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  .animate-floaty {
+    animation: floaty 6.5s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 120% 50%;
+    }
+  }
+  .shimmer-border {
+    position: relative;
+  }
+  .shimmer-border::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      90deg,
+      hsl(var(--primary) / 0.0),
+      hsl(var(--primary) / 0.65),
+      hsl(var(--accent) / 0.55),
+      hsl(var(--primary) / 0.0)
+    );
+    background-size: 220% 100%;
+    animation: shimmer 3.6s linear infinite;
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0.9;
+  }
+}

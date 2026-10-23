@@ -34,6 +34,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     name: "VaidyaScribe",
+    link: "https://siha-eight.vercel.app/",
     kind: "notes",
     summary:
       "AI clinical notes tool that turns doctor–patient conversations into AIIMS-compliant EMR notes using Sarvam AI speech-to-text and Gemini.",
